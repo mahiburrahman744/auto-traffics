@@ -1,6 +1,9 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
 const randomUseragent = require('random-useragent');
 const proxyChain = require('proxy-chain');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+
+puppeteer.use(StealthPlugin());
 
 const urls = [
   "https://www.trickadsagencyltd.com",
@@ -29,7 +32,7 @@ const proxyUrl = "http://iekqsuzp-rotate:q5zrpgr2jx5g@p.webshare.io:80";
       const newProxyUrl = await proxyChain.anonymizeProxy(proxyUrl);
 
       const browser = await puppeteer.launch({
-        headless: false, // Use non-headless mode to mimic real browsers
+        headless: true, // Use headless mode
         args: [
           `--proxy-server=${newProxyUrl}`,
           `--user-agent=${userAgent}`,
