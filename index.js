@@ -9,8 +9,39 @@ const urls = [
   "https://www.trickadsagencyltd.com",
   "https://www.trickadsagencyltd.com/2023/07/3d-cards-bypass-termux-introduction-to.html",
   "https://www.trickadsagencyltd.com/2023/07/bangladesh-job-circular-2024.html",
-  // Add all other URLs here
+  "https://www.trickadsagencyltd.com/2023/08/bin-list-american-express-debit-cards.html",
+  "https://www.trickadsagencyltd.com/2023/08/facebook-prepaid-loaded-code-and.html",
+  "https://www.trickadsagencyltd.com/2023/08/for-nurul-haq-noor-politics-is-not-just.html",
+  "https://www.trickadsagencyltd.com/2023/08/how-to-set-up-facebook-auto-pay-with.html",
+  "https://www.trickadsagencyltd.com/2023/08/trick-ads-agency-ltd-and-facebook-auto.html",
+  "https://www.trickadsagencyltd.com/2023/09/earn-easy-money-from-home-with.html",
+  "https://www.trickadsagencyltd.com/2023/09/free-7-domain-hosting-providers-online.html",
+  "https://www.trickadsagencyltd.com/2023/09/optimizing-your-facebook-ad-campaign.html",
+  "https://www.trickadsagencyltd.com/2023/10/blog-post.html",
+  "https://www.trickadsagencyltd.com/2023/10/tool-for-finding-facebook-ads-auto-pay.html",
+  "https://www.trickadsagencyltd.com/2024/02/exploring-business-services-in-usa.html",
+  "https://www.trickadsagencyltd.com/2024/02/insuring-your-peace-of-mind.html",
+  "https://www.trickadsagencyltd.com/2024/02/streamline-your-finances-with-easily.html",
+  "https://www.trickadsagencyltd.com/2024/03/automated-traffic-solutions-drive.html",
+  "https://www.trickadsagencyltd.com/2024/03/non-sk-premium-checker-for-adsbinfree.html",
+  "https://www.trickadsagencyltd.com/2024/03/temporary-email-generator-for-trick-ads.html",
+  "https://www.trickadsagencyltd.com/2024/04/join-freelancing-telegram-channel.html",
+  "https://www.trickadsagencyltd.com/2024/04/new-batch-of-live-classes-fb-auto-pay.html",
+  "https://www.trickadsagencyltd.com/megamenu/recent",
+  "https://www.trickadsagencyltd.com/p/amex-bin-information-for-trick-ads.html",
+  "https://www.trickadsagencyltd.com/p/bin-lookup.html",
+  "https://www.trickadsagencyltd.com/p/card-extractor.html",
+  "https://www.trickadsagencyltd.com/p/credit-card-checker-for-trick-ads.html",
+  "https://www.trickadsagencyltd.com/p/easily-pay-account-onboarding-form.html",
+  "https://www.trickadsagencyltd.com/p/face-generator.html",
+  "https://www.trickadsagencyltd.com/p/privacy-policy.html",
+  "https://www.trickadsagencyltd.com/p/stripe-secret-key-checker.html",
+  "https://www.trickadsagencyltd.com/p/welcome-to-trick-ads-agency-ltd.html",
+  "https://www.trickadsagencyltd.com/search",
+  "https://www.trickadsagencyltd.com/search/label/blogging",
+  "https://www.trickadsagencyltd.com/search/label/Dark%20Web%20Markets%20links"
 ];
+
 
 const referrers = [
   "https://www.facebook.com/",
@@ -45,6 +76,7 @@ const proxyUrl = "http://iekqsuzp-rotate:q5zrpgr2jx5g@p.webshare.io:80";
       });
 
       const page = await browser.newPage();
+      await page.setViewport({ width: 1280, height: 800 }); // Explicitly set the viewport dimensions
       await page.setExtraHTTPHeaders({ 'referer': referrer });
 
       try {
