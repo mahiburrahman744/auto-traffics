@@ -19,8 +19,7 @@ const referrers = [
 ];
 
 
-// New proxy configuration
-const proxyUrl = "http://qqk9da986ugmo7q:gc3jjx3wsod6ytn@rp.proxyscrape.com:6060";
+const proxyUrl = "http://iekqsuzp-rotate:q5zrpgr2jx5g@p.webshare.io:80";
 
 (async () => {
   while (true) {
@@ -81,7 +80,6 @@ const proxyUrl = "http://qqk9da986ugmo7q:gc3jjx3wsod6ytn@rp.proxyscrape.com:6060
           if (clickablePoint) {
             try {
               await randomLink.click();
-              await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 5000 });
               await page.waitForTimeout(Math.floor(Math.random() * 3000) + 1000); // Wait 1 to 3 seconds
             } catch (clickError) {
               console.log(`Failed to click element: ${clickError.message}`);
