@@ -79,8 +79,13 @@ const proxyUrl = "http://qqk9da986ugmo7q:gc3jjx3wsod6ytn@rp.proxyscrape.com:6060
           const randomLink = links[Math.floor(Math.random() * links.length)];
           const clickablePoint = await randomLink.boundingBox();
           if (clickablePoint) {
-            await randomLink.click();
-            await page.waitForTimeout(Math.floor(Math.random() * 3000) + 1000); // Wait 1 to 3 seconds
+            try {
+              await randomLink.click();
+              await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 5000 });
+              await page.waitForTimeout(Math.floor(Math.random() * 3000) + 1000); // Wait 1 to 3 seconds
+            } catch (clickError) {
+              console.log(`Failed to click element: ${clickError.message}`);
+            }
           } else {
             console.log(`Element not clickable or not an HTMLElement: ${randomLink}`);
           }
