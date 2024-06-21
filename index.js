@@ -42,7 +42,6 @@ const urls = [
   "https://www.trickadsagencyltd.com/search/label/Dark%20Web%20Markets%20links"
 ];
 
-
 const referrers = [
   "https://www.facebook.com/",
   "https://www.youtube.com/",
@@ -110,8 +109,13 @@ const proxyUrl = "http://iekqsuzp-rotate:q5zrpgr2jx5g@p.webshare.io:80";
         const links = await page.$$('a');
         if (links.length > 0) {
           const randomLink = links[Math.floor(Math.random() * links.length)];
-          await randomLink.click();
-          await page.waitForTimeout(Math.floor(Math.random() * 3000) + 1000); // Wait 1 to 3 seconds
+          const clickablePoint = await randomLink.boundingBox();
+          if (clickablePoint) {
+            await randomLink.click();
+            await page.waitForTimeout(Math.floor(Math.random() * 3000) + 1000); // Wait 1 to 3 seconds
+          } else {
+            console.log(`Element not clickable or not an HTMLElement: ${randomLink}`);
+          }
         }
 
         // Wait for a random amount of time
