@@ -1,0 +1,14 @@
+{
+  "name": "realistic-traffic-bot",
+  "version": "1.0.0",
+  "description": "A bot to generate realistic web traffic",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "puppeteer": "^13.0.0",
+    "random-useragent": "^0.5.0",
+    "proxy-chain": "^1.1.0"
+  }
+}
