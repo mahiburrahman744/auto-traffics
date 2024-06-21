@@ -57,7 +57,7 @@ const urls = [
     "https://www.trickadsagencyltd.com/2023/09/free-7-domain-hosting-providers-online.html",
     "https://www.trickadsagencyltd.com/2023/08/trick-ads-agency-ltd-and-facebook-auto.html",
     "https://www.trickadsagencyltd.com/2023/08/trick-ads-agency-ltd-and-facebook-auto.html",
-    "https://www.trickadsagencyltd.com/2023/08/facebook-prepaid-loaded-code-and.html",",
+    "https://www.trickadsagencyltd.com/2023/08/facebook-prepaid-loaded-code-and.html",
     "https://www.trickadsagencyltd.com/2023/08/facebook-prepaid-loaded-code-and.html",
     "https://www.trickadsagencyltd.com/search?updated-max=2023-08-23T02:40:00-07:00&amp;max-results=999#PageNo=2",
     "https://www.trickadsagencyltd.com/2023/07/bangladesh-job-circular-2024.html
