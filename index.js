@@ -6,7 +6,37 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
 const urls = [
-  "https://www.highrevenuenetwork.com/iaqgtx69y1?key=14a1e46999747270c942f2634ef5306a",
+  "https://www.adsbinfree.com/2023/09/how-to-increase-fecebook-threshold.html",
+  "https://www.adsbinfree.com/search/label/tools",
+  "https://www.adsbinfree.com/p/adsbinfree-product-buy-prosessing.html",
+  "https://www.adsbinfree.com/p/contact-us.html",
+  "https://www.adsbinfree.com/2023/09/facebook-auto-pay-bin-finding-method.html",
+  "https://www.adsbinfree.com/p/ads-bin-free-privacy-policy.html",
+  "https://www.adsbinfree.com/2023/09/fb-personal-nolimit-account-create-and.html",
+  "https://www.adsbinfree.com/2024/03/premium-checker-for-adsbinfree.html",
+  "https://www.adsbinfree.com/p/affiliate-program.html",
+  "https://www.adsbinfree.com/p/ads-bin-freeterms-conditions.html",
+  "https://www.adsbinfree.com/search/label/Spamming",
+  "https://www.adsbinfree.com/search/label/BIN",
+  "https://www.adsbinfree.com/2024/03/google-adx-account-approval-service.html",
+  "https://www.adsbinfree.com/2023/09/google-threshold-javascript-code-with.html",
+  "https://www.adsbinfree.com/2023/12/tiktok-ads-threshold-50-full-method.html",
+  "https://www.adsbinfree.com/2023/09/50-cracking-tools-you-need-to-crack.html",
+  "https://www.adsbinfree.com/2023/09/fecebook-prepaid-loaded-method.html",
+  "https://www.adsbinfree.com/",
+  "https://www.adsbinfree.com/2023/09/amex-bin-auto-pay.html",
+  "https://www.adsbinfree.com/2024/02/facebook-advertising-our-verified.html",
+  "https://www.adsbinfree.com/2023/09/iban-method-fecebook-ads.html",
+  "https://www.adsbinfree.com/search/label/method",
+  "https://www.adsbinfree.com/2023/09/fecebook-auto-pay-method.html",
+  "https://www.adsbinfree.com/2023/09/fbi-hacking-and-forensic-toolkit-hack.html",
+  "https://www.adsbinfree.com/p/update-bin-here.html",
+  "https://www.adsbinfree.com/2023/09/instagram-prepaid-funds-add-method.html",
+  "https://www.adsbinfree.com/2023/09/join-private-premium-channels-adsbinfree.html",
+  "https://www.adsbinfree.com/p/adsbinfree-cancellation-regarding.html",
+  "https://www.adsbinfree.com/2023/09/iban-add-javascript-code-working-now.html",
+  "https://www.adsbinfree.com/p/adsbinfree-product-delivery.html",
+  "https://www.adsbinfree.com/p/fake-address-generator-us-us-address.html"
 ];
 
 const referrers = [
