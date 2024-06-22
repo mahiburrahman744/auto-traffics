@@ -67,14 +67,16 @@ const getRandomGeolocation = () => {
     return { latitude: parseFloat(randomLatitude), longitude: parseFloat(randomLongitude) };
 };
 
-// Function to get country from geolocation
+// Function to get country from geolocation using OpenCageData API
 const getCountryFromGeolocation = async (latitude, longitude) => {
+    const apiKey = '818ac80adecb4d79aa3c64ac6f6ed42b'; // Replace with your OpenCageData API key
     try {
-        const response = await axios.get(`https://geocode.xyz/${latitude},${longitude}?geoit=json`);
-        if (response.data && response.data.country) {
-            return response.data.country;
+        const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`);
+        if (response.data && response.data.results && response.data.results.length > 0) {
+            const country = response.data.results[0].components.country;
+            return country || 'Unknown';
         } else {
-            console.error('Geocode API error:', response.data);
+            console.error('OpenCageData API error:', response.data);
             return 'Unknown';
         }
     } catch (error) {
