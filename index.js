@@ -1,140 +1,239 @@
 const puppeteer = require('puppeteer-extra');
-const randomUseragent = require('random-useragent');
-const proxyChain = require('proxy-chain');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const randomUseragent = require('random-useragent');
+const axios = require('axios');
 
+// Add stealth plugin to minimize bot detection
 puppeteer.use(StealthPlugin());
 
-const urls = [
-  "https://www.adsbinfree.com/2023/09/how-to-increase-fecebook-threshold.html",
-  "https://www.adsbinfree.com/search/label/tools",
-  "https://www.adsbinfree.com/p/adsbinfree-product-buy-prosessing.html",
-  "https://www.adsbinfree.com/p/contact-us.html",
-  "https://www.adsbinfree.com/2023/09/facebook-auto-pay-bin-finding-method.html",
-  "https://www.adsbinfree.com/p/ads-bin-free-privacy-policy.html",
-  "https://www.adsbinfree.com/2023/09/fb-personal-nolimit-account-create-and.html",
-  "https://www.adsbinfree.com/2024/03/premium-checker-for-adsbinfree.html",
-  "https://www.adsbinfree.com/p/affiliate-program.html",
-  "https://www.adsbinfree.com/p/ads-bin-freeterms-conditions.html",
-  "https://www.adsbinfree.com/search/label/Spamming",
-  "https://www.adsbinfree.com/search/label/BIN",
-  "https://www.adsbinfree.com/2024/03/google-adx-account-approval-service.html",
-  "https://www.adsbinfree.com/2023/09/google-threshold-javascript-code-with.html",
-  "https://www.adsbinfree.com/2023/12/tiktok-ads-threshold-50-full-method.html",
-  "https://www.adsbinfree.com/2023/09/50-cracking-tools-you-need-to-crack.html",
-  "https://www.adsbinfree.com/2023/09/fecebook-prepaid-loaded-method.html",
-  "https://www.adsbinfree.com/",
-  "https://www.adsbinfree.com/2023/09/amex-bin-auto-pay.html",
-  "https://www.adsbinfree.com/2024/02/facebook-advertising-our-verified.html",
-  "https://www.adsbinfree.com/2023/09/iban-method-fecebook-ads.html",
-  "https://www.adsbinfree.com/search/label/method",
-  "https://www.adsbinfree.com/2023/09/fecebook-auto-pay-method.html",
-  "https://www.adsbinfree.com/2023/09/fbi-hacking-and-forensic-toolkit-hack.html",
-  "https://www.adsbinfree.com/p/update-bin-here.html",
-  "https://www.adsbinfree.com/2023/09/instagram-prepaid-funds-add-method.html",
-  "https://www.adsbinfree.com/2023/09/join-private-premium-channels-adsbinfree.html",
-  "https://www.adsbinfree.com/p/adsbinfree-cancellation-regarding.html",
-  "https://www.adsbinfree.com/2023/09/iban-add-javascript-code-working-now.html",
-  "https://www.adsbinfree.com/p/adsbinfree-product-delivery.html",
-  "https://www.adsbinfree.com/p/fake-address-generator-us-us-address.html"
+// List of common viewport sizes
+const viewports = [
+    { width: 1920, height: 1080 },
+    { width: 1366, height: 768 },
+    { width: 1440, height: 900 },
+    { width: 1600, height: 900 },
+    { width: 1280, height: 800 },
+    { width: 1280, height: 720 },
 ];
 
-const referrers = [
-  "https://www.facebook.com/",
-  "https://www.youtube.com/",
-  "https://www.twitter.com/",
-  "https://www.linkedin.com/",
-  "https://www.instagram.com/",
-  "https://www.pinterest.com/"
+// List of referer URLs to simulate traffic from different sources
+const referers = [
+    'https://www.facebook.com/',
+    'https://www.youtube.com/',
+    'https://www.google.com/',
+    'https://www.twitter.com/',
+    'https://www.instagram.com/',
+    'https://www.linkedin.com/',
+    'https://www.reddit.com/',
+    'https://www.tiktok.com/',
+    'https://www.pinterest.com/',
+    'https://www.quora.com/',
+    'https://www.medium.com/',
+    'https://www.tumblr.com/',
+    'https://www.flickr.com/',
+    'https://www.dailymotion.com/',
+    'https://www.vimeo.com/',
+    'https://www.weibo.com/',
+    'https://www.qq.com/',
+    'https://www.whatsapp.com/',
+    'https://www.telegram.org/',
+    'https://www.snapchat.com/',
+    'https://www.line.me/',
+    'https://www.vk.com/',
+    'https://www.odnoklassniki.ru/',
+    'https://www.bing.com/',
+    'https://www.yahoo.com/',
 ];
 
+// Function to get a random user agent
+const getRandomUserAgent = () => {
+    return randomUseragent.getRandom();
+};
 
-// New proxy configuration
-const proxyUrl = "http://iekqsuzp-rotate:q5zrpgr2jx5g@p.webshare.io:80";
+// Function to get a random viewport size
+const getRandomViewport = () => {
+    return viewports[Math.floor(Math.random() * viewports.length)];
+};
 
-(async () => {
-  while (true) {
-    for (const url of urls) {
-      const userAgent = randomUseragent.getRandom();
-      const referrer = referrers[Math.floor(Math.random() * referrers.length)];
-      const newProxyUrl = await proxyChain.anonymizeProxy(proxyUrl);
+// Function to get a random referer
+const getRandomReferer = () => {
+    return referers[Math.floor(Math.random() * referers.length)];
+};
 
-      const browser = await puppeteer.launch({
-        headless: true, // Use headless mode
-        args: [
-          `--proxy-server=${newProxyUrl}`,
-          `--user-agent=${userAgent}`,
-          '--disable-setuid-sandbox',
-          '--no-sandbox',
-          '--disable-web-security',
-          '--disable-features=IsolateOrigins,site-per-process',
-        ],
-        ignoreHTTPSErrors: true,
-      });
+// Function to get a random geolocation
+const getRandomGeolocation = () => {
+    const randomLatitude = (Math.random() * 180 - 90).toFixed(4); // Generates a latitude between -90 and 90
+    const randomLongitude = (Math.random() * 360 - 180).toFixed(4); // Generates a longitude between -180 and 180
+    return { latitude: parseFloat(randomLatitude), longitude: parseFloat(randomLongitude) };
+};
 
-      const page = await browser.newPage();
-      await page.setViewport({ width: 1280, height: 800 }); // Explicitly set the viewport dimensions
-      await page.setExtraHTTPHeaders({ 'referer': referrer });
-
-      try {
-        await page.goto(url, { waitUntil: 'networkidle2' });
-        console.log(`Visited ${url} with ${userAgent} from ${referrer}`);
-
-        // Simulate human-like interactions
-        await page.mouse.move(
-          Math.random() * page.viewport().width,
-          Math.random() * page.viewport().height
-        );
-
-        // Random scrolling
-        await page.evaluate(() => {
-          const getRandomInt = (min, max) => Math.floor(Math.random() * (min, max + 1)) + min;
-          let totalHeight = 0;
-          const distance = getRandomInt(100, 300);
-
-          const scroll = () => {
-            window.scrollBy(0, distance);
-            totalHeight += distance;
-
-            if (totalHeight < document.body.scrollHeight) {
-              setTimeout(scroll, getRandomInt(200, 400));
-            }
-          };
-          scroll();
-        });
-
-        // Simulate random clicks
-        const links = await page.$$('a');
-        if (links.length > 0) {
-          const randomLink = links[Math.floor(Math.random() * links.length)];
-          const clickablePoint = await randomLink.boundingBox();
-          if (clickablePoint) {
-            try {
-              await randomLink.click();
-              await page.waitForTimeout(Math.floor(Math.random() * 3000) + 1000); // Wait 1 to 3 seconds
-            } catch (clickError) {
-              console.log(`Failed to click element: ${clickError.message}`);
-            }
-          } else {
-            console.log(`Element not clickable or not an HTMLElement: ${randomLink}`);
-          }
+// Function to get country from geolocation
+const getCountryFromGeolocation = async (latitude, longitude) => {
+    try {
+        const response = await axios.get(`https://geocode.xyz/${latitude},${longitude}?geoit=json`);
+        if (response.data && response.data.country) {
+            return response.data.country;
+        } else {
+            console.error('Geocode API error:', response.data);
+            return 'Unknown';
         }
-
-        // Wait for a random amount of time
-        await page.waitForTimeout(Math.floor(Math.random() * 2000) + 3000); // Wait 3 to 5 seconds
-      } catch (error) {
-        console.error(`Error visiting ${url}:`, error);
-      } finally {
-        await browser.close();
-        await proxyChain.closeAnonymizedProxy(newProxyUrl, true);
-      }
-
-      // Wait between 1 and 5 seconds before the next visit
-      await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 4000) + 1000));
+    } catch (error) {
+        console.error('Error fetching country:', error);
+        return 'Unknown';
     }
-  }
-})();
+};
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+// Function to generate a random device profile
+const generateRandomDeviceProfile = async (page) => {
+    const userAgent = getRandomUserAgent();
+    const viewport = getRandomViewport();
+    const referer = getRandomReferer();
+    const geolocation = getRandomGeolocation();
+    const country = await getCountryFromGeolocation(geolocation.latitude, geolocation.longitude);
+
+    await page.setUserAgent(userAgent);
+    await page.setViewport(viewport);
+    await page.setExtraHTTPHeaders({ referer });
+    await page.setGeolocation(geolocation);
+
+    console.log(`Using referer: ${referer}`);
+    console.log(`Using geolocation: Latitude ${geolocation.latitude}, Longitude ${geolocation.longitude}, Country: ${country}`);
+};
+
+// Function to add random mouse movements to simulate human behavior
+const addMouseMovements = async (page) => {
+    await page.mouse.move(
+        Math.random() * page.viewport().width,
+        Math.random() * page.viewport().height
+    );
+    await page.waitForTimeout(1000 + Math.random() * 2000); // Random delay between 1 and 3 seconds
+};
+
+// Function to log browser fingerprinting information
+const logFingerprint = async (page) => {
+    const userAgent = await page.evaluate(() => navigator.userAgent);
+    const platform = await page.evaluate(() => navigator.platform);
+    const language = await page.evaluate(() => navigator.language);
+    console.log(`Browser fingerprint: User Agent: ${userAgent}, Platform: ${platform}, Language: ${language}`);
+};
+
+// Function to scroll down the page
+const autoScroll = async (page) => {
+    await page.evaluate(async () => {
+        await new Promise((resolve) => {
+            let totalHeight = 0;
+            const distance = 100;
+            const timer = setInterval(() => {
+                const scrollHeight = document.body.scrollHeight;
+                window.scrollBy(0, distance);
+                totalHeight += distance;
+
+                if (totalHeight >= scrollHeight) {
+                    clearInterval(timer);
+                    resolve();
+                }
+            }, 100);
+        });
+    });
+};
+
+// Function to visit the page and perform actions
+async function visitAndInteract() {
+    while (true) {
+        let page, browser;
+        try {
+            // Launch browser without proxy
+            browser = await puppeteer.launch({
+                headless: true,
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                ]
+            });
+            page = await browser.newPage();
+
+            // Generate random device profile for the initial visit
+            await generateRandomDeviceProfile(page);
+
+            // Log browser fingerprint
+            await logFingerprint(page);
+
+            // Increase the navigation timeout
+            await page.setDefaultNavigationTimeout(120000); // 120 seconds
+
+            // Visit the page
+            await page.goto('https://toolfuz.com/checker/', { waitUntil: 'networkidle2' });
+
+            // Add random mouse movements
+            await addMouseMovements(page);
+
+            // Scroll down the page
+            await autoScroll(page);
+
+            // Click the 'Learn More' button
+            await page.waitForSelector('a.btn.btn-primary.btn-lg', { timeout: 30000 });
+            await page.click('a.btn.btn-primary.btn-lg');
+            console.log('Clicked: Learn More button');
+
+            // Wait for a few seconds
+            await page.waitForTimeout(3000);
+
+            // Click 'Get Number' buttons with different device profiles
+            const getNumberButtons = await page.$$('button.btn.btn-primary');
+            let buttonIndex = 1;
+            for (const button of getNumberButtons) {
+                // Generate a new random device profile for each button click
+                await generateRandomDeviceProfile(page);
+                await button.click();
+                console.log(`Clicked: Get Number button ${buttonIndex}`);
+                buttonIndex++;
+                await page.waitForTimeout(3000); // Wait for 3 seconds between clicks
+
+                // Add random mouse movements
+                await addMouseMovements(page);
+            }
+
+            // Click 'Play Video' button with a new device profile
+            await generateRandomDeviceProfile(page);
+
+            // Scroll to the 'Play Video' button before clicking
+            await page.evaluate(() => {
+                const playVideoButton = document.querySelector('button[onclick="showAd(\'masuda\')"]');
+                if (playVideoButton) {
+                    playVideoButton.scrollIntoView();
+                }
+            });
+
+            // Wait for the 'Play Video' button to be visible
+            await page.waitForSelector('button[onclick="showAd(\'masuda\')"]', { visible: true, timeout: 30000 });
+
+            // Check for the 'Play Video' button before clicking
+            const playVideoButton = await page.$('button[onclick="showAd(\'masuda\')"]');
+            if (playVideoButton) {
+                await playVideoButton.click();
+                console.log('Clicked: Play Video button');
+            } else {
+                console.log('Play Video button not found.');
+            }
+
+            // Wait for 10 seconds before repeating
+            await page.waitForTimeout(10000);
+
+            console.log('Page visited successfully.');
+
+            await browser.close();
+
+        } catch (error) {
+            console.error('An error occurred:', error);
+            if (page) {
+                const html = await page.content();
+                console.log(html);
+            }
+            if (browser) {
+                await browser.close();
+            }
+        }
+    }
 }
+
+visitAndInteract();
