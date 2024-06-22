@@ -26,4 +26,3 @@ jobs:
 
     - name: Run traffic bot script
       run: npm start
-
