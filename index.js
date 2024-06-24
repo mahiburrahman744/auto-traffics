@@ -49,7 +49,7 @@ const referrers = [
 ];
 
 // New proxy configuration
-const proxyUrl = "http://iekqsuzp-rotate:q5zrpgr2jx5g@p.webshare.io:80";
+const proxyUrl = "http://tinsqize-rotate:p7ocmx9o080y@p.webshare.io:80";
 
 (async () => {
   while (true) {
